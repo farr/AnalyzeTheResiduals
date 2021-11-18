@@ -1,25 +1,44 @@
 % Define document class
-\documentclass[twocolumn]{aastex631}
+\documentclass[modern]{aastex631}
 
 % Filler text
 \usepackage{blindtext}
+
+% Math shortcuts
+\newcommand{\like}{\mathcal{L}}
 
 % Begin!
 \begin{document}
 
 % Title
-\title{An open source scientific article}
+\title{When and How Can we Fit Residuals?}
 
 % Author list
-\author[0000-0000-0000-0000]{First Author}
+\author[0000-0003-1540-8562]{Will M. Farr}
+\email{will.farr@stonybrook.edu}
+\email{wfarr@flatironinstitute.org}
+\affiliation{Department of Physics and Astronomy, Stony Brook University, Stony Brook NY 11794, USA}
+\affiliation{Center for Computational Astrophysics, Flatiron Institute, New York NY 10010, USA}
 
 % Abstract with filler text
 \begin{abstract}
-    \blindtext
+    I discuss the effect of fixing the \emph{residuals} from a global fit in
+    LISA-like data when fitting broadband signals like the inspiral of a
+    high-redshift seed BBH.
 \end{abstract}
 
 % Main body with filler text
 \section{Introduction}
-\Blindtext[4]
+
+The joint likelihood for a single BBH merger waveform $h$ and some number of
+white dwarf monochromatic or near-monochromatic waveforms in LISA data $d$ is
+%
+\begin{equation}
+    \log \like \propto - \sum_i \Delta f \frac{\left| d_i - h_i - \sum_\alpha g_{\alpha, i} \right|^2}{2 S_i},
+\end{equation}
+%
+where the sum runs over frequency-domain components and $S_i$ is the noise PSD
+at frequency $i$.
+
 
 \end{document}
