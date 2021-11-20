@@ -6,6 +6,7 @@
 
 % Math shortcuts
 \newcommand{\like}{\mathcal{L}}
+\newcommand{\order}[1]{\mathcal{O}\left( #1 \right)}
 
 % Begin!
 \begin{document}
@@ -34,11 +35,69 @@ The joint likelihood for a single BBH merger waveform $h$ and some number of
 white dwarf monochromatic or near-monochromatic waveforms in LISA data $d$ is
 %
 \begin{equation}
-    \log \like \propto - \sum_i \Delta f \frac{\left| d_i - h_i - \sum_\alpha g_{\alpha, i} \right|^2}{2 S_i},
+    \log \like \propto - \Delta f \sum_i \frac{\left| d_i - h_i - \sum_\alpha g_{\alpha, i} \right|^2}{2 S_i},
 \end{equation}
 %
 where the sum runs over frequency-domain components and $S_i$ is the noise PSD
-at frequency $i$.
+at frequency $i$.  Expanding to quadratic order about $h_i = h_{i,0}$ in terms
+of the parameters $\theta$ that control the waveform, we have
+%
+\begin{multline}
+    \log \like \sim - \Delta f \sum_i \frac{1}{2 S_i} \left( \left| d_i - h_{i,0} - G_i \right|^2 - 2 \Re \left( d_i - h_{i,0} - G_i \right)^* \frac{\partial h_i}{\partial \theta^a} \left( \theta^a - \theta^a_0 \right)  \right. \\ \left. + \left(\theta^a - \theta_0^a \right) \left( \frac{\partial h_i^*}{\partial \theta^a} \frac{\partial h_i}{\partial \theta^b} + \Re \left( d_i - h_{i,0} - G_i \right)^* \frac{\partial^2 h_i}{\partial \theta^a \partial \theta^b} \right) \left( \theta^b - \theta_0^b \right) \right),
+\end{multline}
+%
+where
+%
+\begin{equation}
+    G_i \equiv \sum_\alpha g_{\alpha,i}.
+\end{equation}
+%
+Collecting terms, we see that we have a Gaussian likelihood for the parameters
+$\theta$, with
+%
+\begin{equation}
+    \log \like \sim - \left( A + B_a \Delta \theta^a + \frac{1}{2} \Delta \theta^a C_{ab} \Delta \theta^b \right),
+\end{equation}
+%
+with
+%
+\begin{equation}
+    B_a = \Delta f \sum_i \frac{1}{S_i} \left( - \Re \left( d_i - h_{i,0} - G_i \right)^* \frac{\partial h_i}{\partial \theta^a} \right)
+\end{equation}
+%
+and
+%
+\begin{equation}
+    C_{ab} = \Delta f \sum_i \frac{1}{S_i} \left( \frac{\partial h_i^*}{\partial \theta^a} \frac{\partial h_i}{\partial \theta^b} + \Re \left( d_i - h_{i,0} - G_i \right)^* \frac{\partial^2 h_i}{\partial \theta^a \partial \theta^b} \right).
+\end{equation}
+%
+
+Now we make the assumption that the sources making up $G$ are \emph{narrowband},
+that is that their S/N accumulates over a small number of bins around $i = i_0$,
+such that
+%
+\begin{equation}
+\frac{\left| g_{\alpha,i} \right|^2}{S_i} \sim \begin{cases}
+    \order{\rho_\alpha^2} & \left| i - i_0 \right| \sim \order{1} \\
+    0 & \mathrm{otherwise}
+\end{cases}.
+\end{equation}
+%
+We further assume that $h$ and therefore $h_0$ are \emph{broadband}, so
+%
+\begin{equation}
+\frac{\left| h_i \right|^2}{S_i} \sim \frac{\order{\rho_h^2}}{N}
+\end{equation}
+%
+where $N \gg 1$ is the number of bins over which the S/N of $h$ accumulates.
+
+Let us suppose that the data are composed of signals like $h$ and $G$ plus colored noise $n$ with PSD $S$:
+%
+\begin{equation}
+    d_i = \bar{h}_i + \bar{G}_i + n_i
+\end{equation}
+%
+
 
 
 \end{document}
